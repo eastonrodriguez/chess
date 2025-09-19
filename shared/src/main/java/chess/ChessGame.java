@@ -1,6 +1,7 @@
 package chess;
 
 import java.util.Collection;
+import java.util.Collections;
 
 /**
  * For a class that can manage a chess game, making moves on a board
@@ -54,7 +55,9 @@ public class ChessGame {
      */
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
         ChessPiece piece = board.getPiece(startPosition);
-        if (piece == null) return null;
+        if (piece == null) {
+            return Collections.emptyList();
+        }
         return piece.pieceMoves(board, startPosition);
     }
 
@@ -66,12 +69,9 @@ public class ChessGame {
      */
     public void makeMove(ChessMove move) {
         ChessPiece piece = board.getPiece(move.getStartPosition());
-        if (piece == null) {
-            throw new InvalidMoveException("No piece at start position");
+        if (PAWN.move.getPromotionPiece() != null) {
+            piece = new ChessPiece(QUEEN.getTeamColor(), move.getPromotionPiece());
         }
-        board.getPiece(move.getEndPosition(), piece);
-        board.getPiece(move.getStartPosition(), null);
-        turn = (turn == TeamColor.WHITE) ? TeamColor.BLACK : TeamColor.WHITE;
     }
 
     /**
@@ -95,7 +95,28 @@ public class ChessGame {
         if (!isInCheck(teamColor)) {
             return false;
         }
-        throw new RuntimeException("Not implemented");
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                ChessPosition pos = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(pos);
+                if (piece != null && piece.getTeamColor() == teamColor) {
+                    for (ChessMove move : piece.pieceMoves(board, pos)) {
+                        ChessPiece captured = board.getPiece(move.getEndPosition());
+                        board.get(move.getEndPosition(), piece);
+                        board.setPiece(pos, null);
+                        boolean stillInCheck = isInCheck(teamColor);
+                        board.setPiece(pos, piece);
+                        board.setPiece(move.getEndPosition(), captured);
+
+                        if (!stillInCheck) {
+                            return false; // Found a move that escapes check
+                        }
+                    }
+                }
+            }
+        }
+
+        return true;
     }
 
     /**
