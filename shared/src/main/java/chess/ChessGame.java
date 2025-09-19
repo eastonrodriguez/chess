@@ -112,6 +112,11 @@ public class ChessGame {
             for (int col = 0; col < 8; col++) {
                 ChessPosition pos = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(pos);
+                if (piece != null && piece.getTeamColor() == teamColor) {
+                    for (ChessMove move : piece.pieceMoves(board, pos)) {
+                        boolean stillInCheck = isInCheck(teamColor);
+                        if (!stillInCheck) return false;
+                    }
     }
 
     /**
