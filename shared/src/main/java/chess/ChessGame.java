@@ -96,6 +96,11 @@ public class ChessGame {
                 }
             }
         }
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                ChessPosition p = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(p);
+                if piece.getTeamColor() != teamColor
 
         return false;
     }
@@ -110,21 +115,22 @@ public class ChessGame {
         if (!isInCheck(teamColor)) return false;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                ChessPosition pos = new ChessPosition(row, col);
-                ChessPiece piece = board.getPiece(pos);
+                ChessPosition p = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(p);
                 if (piece != null && piece.getTeamColor() == teamColor) {
-                    for (ChessMove move : piece.pieceMoves(board, pos)) {
+                    for (ChessMove move : piece.pieceMoves(board, p)) {
                         ChessPiece gameover = board.getPiece(move.getEndPosition());
                         board.addPiece(move.getEndPosition(), piece);
-                        board.addPiece(pos, null);
+                        board.addPiece(p, null);
                         boolean stillInCheck = isInCheck(teamColor);
-                        board.addPiece(pos, piece);
+                        board.addPiece(p, piece);
                         board.addPiece(move.getEndPosition(), gameover);
                         if (!stillInCheck) return false;
                     }
                 }
             }
         }
+        return true;
     }
 
     /**
