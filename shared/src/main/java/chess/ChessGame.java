@@ -55,8 +55,9 @@ public class ChessGame {
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
         ChessPiece piece = board.getPiece(startPosition);
         if (piece == null) {
-            throw new IllegalArgumentException("piece not at start");
+            return Collections.emptyList();
         }
+
         return piece.pieceMoves(board, startPosition);
     }
 
@@ -68,6 +69,9 @@ public class ChessGame {
      */
     public void makeMove(ChessMove move) {
         ChessPiece piece = board.getPiece(move.getStartPosition());
+        if (piece == null) {
+            throw new IllegalArgumentException("no one at start");
+        }
         if (move.getPromotionPiece() != null) {
             piece = new ChessPiece(piece.getTeamColor(), move.getPromotionPiece());
         }
