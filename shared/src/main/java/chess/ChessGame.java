@@ -69,9 +69,12 @@ public class ChessGame {
      */
     public void makeMove(ChessMove move) {
         ChessPiece piece = board.getPiece(move.getStartPosition());
-        if (PAWN.move.getPromotionPiece() != null) {
-            piece = new ChessPiece(QUEEN.getTeamColor(), move.getPromotionPiece());
+        if (move.getPromotionPiece() != null) {
+            piece = new ChessPiece(piece.getTeamColor(), move.getPromotionPiece());
         }
+        board.addPiece(move.getEndPosition(), piece);
+        board.addPiece(move.getStartPosition(), null);
+        turn == TeamColor.WHITE) | TeamColor.BLACK
     }
 
     /**
