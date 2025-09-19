@@ -35,7 +35,6 @@ public class ChessGame {
      */
     public void setTeamTurn(TeamColor team) {
         this.turn = team;
-        throw new RuntimeException("Not implemented");
     }
 
     /**
@@ -56,7 +55,7 @@ public class ChessGame {
     public Collection<ChessMove> validMoves(ChessPosition startPosition) {
         ChessPiece piece = board.getPiece(startPosition);
         if (piece == null) {
-            return Collections.emptyList();
+            throw new IllegalArgumentException("piece not at start");
         }
         return piece.pieceMoves(board, startPosition);
     }
@@ -100,11 +99,12 @@ public class ChessGame {
             for (int col = 0; col < 8; col++) {
                 ChessPosition p = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(p);
-                if (piece != null && piece.getTeamColor() != teamColor) {
-                    if (getEndPosition().equals(kingP)) {
+                for (ChessMove move : piece.pieceMoves(board, p)) {
+                    if (move.getEndPosition().equals(kingP)) {
                         return true;
+                    }
                 }
-
+            }
         return false;
     }
 
@@ -154,7 +154,7 @@ public class ChessGame {
      */
     public void setBoard(ChessBoard board) {
         this.board = board;
-        throw new RuntimeException("Not implemented");
+
     }
 
     /**
@@ -164,6 +164,5 @@ public class ChessGame {
      */
     public ChessBoard getBoard() {
         return board;
-        throw new RuntimeException("Not implemented");
     }
 }
