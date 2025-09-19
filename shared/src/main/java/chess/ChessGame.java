@@ -87,6 +87,8 @@ public class ChessGame {
         ChessPosition kingP = null;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
+                ChessPosition pos = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(pos);
 
             }
         return false;
