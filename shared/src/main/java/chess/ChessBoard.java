@@ -42,8 +42,15 @@ public class ChessBoard {
      * (How the game of chess normally starts)
      */
     public void resetBoard() {
-        board[1][c] = new ChessPiece.PieceType.PAWN.TeamColor.BLACK();
-        board[6][c] = new ChessPiece.PieceType.PAWN.TeamColor.WHITE();
+        for (int r = 0; r < 8; r++) {
+            for (int c = 0; c < 8; c++) {
+                board[r][c] = null;
+            }
+        }
+        for (int c = 0; c < 8; c++) {
+            board[1][c] = new ChessPiece.PieceType.PAWN.TeamColor.BLACK();
+            board[6][c] = new ChessPiece.PieceType.PAWN.TeamColor.WHITE();
+        }
 
         board[0][1] = new ChessPiece.PieceType.KNIGHT.TeamColor.BLACK();
         board[0][6] = new ChessPiece.PieceType.KNIGHT.TeamColor.BLACK();
