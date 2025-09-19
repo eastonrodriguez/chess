@@ -114,9 +114,17 @@ public class ChessGame {
                 ChessPiece piece = board.getPiece(pos);
                 if (piece != null && piece.getTeamColor() == teamColor) {
                     for (ChessMove move : piece.pieceMoves(board, pos)) {
+                        ChessPiece gameover = board.getPiece(move.getEndPosition());
+                        board.addPiece(move.getEndPosition(), piece);
+                        board.addPiece(pos, null);
                         boolean stillInCheck = isInCheck(teamColor);
+                        board.addPiece(pos, piece);
+                        board.addPiece(move.getEndPosition(), gameover);
                         if (!stillInCheck) return false;
                     }
+                }
+            }
+        }
     }
 
     /**
