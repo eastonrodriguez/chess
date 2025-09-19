@@ -9,7 +9,8 @@ package chess;
 public class ChessBoard {
 
     public ChessBoard() {
-        int[][] board = {
+
+        privat board[][] = {
                 {1, 2, 3, 4, 5, 6, 7, 8},
                 {9, 10, 11, 12, 13, 14, 15},
                 {16, 17, 18, 19, 20, 21, 22},
@@ -30,9 +31,9 @@ public class ChessBoard {
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
         throw new RuntimeException("Not implemented");
-        for position in ChessBoard {
-            ++i piece;
-        }
+        int r = position.getRow();
+        int c = position.getColumn();
+        board[r][c]
     }
 
     /**
