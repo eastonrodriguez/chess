@@ -89,7 +89,10 @@ public class ChessGame {
             for (int col = 0; col < 8; col++) {
                 ChessPosition pos = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(pos);
-
+                if (piece != null && piece.getTeamColor() == teamColor &&
+                        piece.getPieceType() == ChessPiece.PieceType.KING) {
+                    kingP = pos;
+                    break;
             }
         return false;
     }
