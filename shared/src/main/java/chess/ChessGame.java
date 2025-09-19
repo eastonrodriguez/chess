@@ -100,7 +100,10 @@ public class ChessGame {
             for (int col = 0; col < 8; col++) {
                 ChessPosition p = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(p);
-                if piece.getTeamColor() != teamColor
+                if (piece != null && piece.getTeamColor() != teamColor) {
+                    if (getEndPosition().equals(kingP)) {
+                        return true;
+                }
 
         return false;
     }
