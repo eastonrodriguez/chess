@@ -87,9 +87,16 @@ public class ChessGame {
         ChessPosition kingP = null;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                pos = new ChessPosition(col, row);
-                
+                ChessPosition pos = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(pos);
+                if (piece != null && piece.getTeamColor() == teamColor &&
+                        piece.getPieceType() == ChessPiece.PieceType.KING) {
+                    kingP = pos;
+                    break;
+                }
             }
+        }
+
         return false;
     }
 
@@ -100,11 +107,11 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
-        if (!isInCheck(teamColor)) {
-            return false;
-        }
-
-        return true;
+        if (!isInCheck(teamColor)) return false;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                ChessPosition pos = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(pos);
     }
 
     /**
