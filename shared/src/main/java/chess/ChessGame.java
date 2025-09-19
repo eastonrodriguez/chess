@@ -74,7 +74,7 @@ public class ChessGame {
         }
         board.addPiece(move.getEndPosition(), piece);
         board.addPiece(move.getStartPosition(), null);
-        turn == TeamColor.WHITE) | TeamColor.BLACK
+        turn = (turn == TeamColor.WHITE) ? TeamColor.BLACK : TeamColor.WHITE;
     }
 
     /**
@@ -85,6 +85,10 @@ public class ChessGame {
      */
     public boolean isInCheck(TeamColor teamColor) {
         ChessPosition kingP = null;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+
+            }
         return false;
     }
 
