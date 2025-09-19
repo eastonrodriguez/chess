@@ -13,9 +13,9 @@ public class ChessGame {
     private ChessBoard board;
 
     public ChessGame() {
-        this.turn = TeamColor.WHITE;
-        this.board = new ChessBoard();
+        board = new ChessBoard();
         board.resetBoard();
+        turn = TeamColor.WHITE;
 
     }
 
@@ -64,10 +64,13 @@ public class ChessGame {
      * @param move chess move to perform
      * @throws InvalidMoveException if move is invalid
      */
-    public void makeMove(ChessMove move) throws InvalidMoveException {
-        ChessPiece piece = board.getPiece(move.getStart());
-        board.setPiece(move.getEnd(), piece);
-        board.setPiece(move.getStart(), null);
+    public void makeMove(ChessMove move) {
+        ChessPiece piece = board.getPiece(move.getStartPosition());
+        if (piece == null) {
+            throw new InvalidMoveException("No piece at start position");
+        }
+        board.getPiece(move.getEndPosition(), piece);
+        board.getPiece(move.getStartPosition(), null);
         turn = (turn == TeamColor.WHITE) ? TeamColor.BLACK : TeamColor.WHITE;
     }
 
