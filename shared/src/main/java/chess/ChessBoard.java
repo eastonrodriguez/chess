@@ -30,6 +30,9 @@ public class ChessBoard {
      */
     public void addPiece(ChessPosition position, ChessPiece piece) {
         throw new RuntimeException("Not implemented");
+        for position in ChessBoard {
+            ++i piece;
+        }
     }
 
     /**
@@ -41,6 +44,7 @@ public class ChessBoard {
      */
     public ChessPiece getPiece(ChessPosition position) {
         throw new RuntimeException("Not implemented");
+
     }
 
     /**
