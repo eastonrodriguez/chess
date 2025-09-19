@@ -87,12 +87,8 @@ public class ChessGame {
         ChessPosition kingP = null;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
-                ChessPosition pos = new ChessPosition(row, col);
-                ChessPiece piece = board.getPiece(pos);
-                if (piece != null && piece.getTeamColor() == teamColor &&
-                        piece.getPieceType() == ChessPiece.PieceType.KING) {
-                    kingP = pos;
-                    break;
+                pos = new ChessPosition(col, row);
+                
             }
         return false;
     }
@@ -106,26 +102,6 @@ public class ChessGame {
     public boolean isInCheckmate(TeamColor teamColor) {
         if (!isInCheck(teamColor)) {
             return false;
-        }
-        for (int row = 0; row < 8; row++) {
-            for (int col = 0; col < 8; col++) {
-                ChessPosition pos = new ChessPosition(row, col);
-                ChessPiece piece = board.getPiece(pos);
-                if (piece != null && piece.getTeamColor() == teamColor) {
-                    for (ChessMove move : piece.pieceMoves(board, pos)) {
-                        ChessPiece captured = board.getPiece(move.getEndPosition());
-                        board.get(move.getEndPosition(), piece);
-                        board.setPiece(pos, null);
-                        boolean stillInCheck = isInCheck(teamColor);
-                        board.setPiece(pos, piece);
-                        board.setPiece(move.getEndPosition(), captured);
-
-                        if (!stillInCheck) {
-                            return false; // Found a move that escapes check
-                        }
-                    }
-                }
-            }
         }
 
         return true;
