@@ -24,7 +24,7 @@ public class ChessGame {
      */
     public TeamColor getTeamTurn() {
         return turn;
-        throw new RuntimeException("Not implemented");
+
     }
 
     /**
@@ -81,6 +81,7 @@ public class ChessGame {
      * @return True if the specified team is in check
      */
     public boolean isInCheck(TeamColor teamColor) {
+        ChessPosition kingP = null;
         return false;
     }
 
@@ -91,6 +92,9 @@ public class ChessGame {
      * @return True if the specified team is in checkmate
      */
     public boolean isInCheckmate(TeamColor teamColor) {
+        if (!isInCheck(teamColor)) {
+            return false;
+        }
         throw new RuntimeException("Not implemented");
     }
 
