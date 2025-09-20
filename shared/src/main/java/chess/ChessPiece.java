@@ -63,9 +63,12 @@ public class ChessPiece {
                 for (int[] dir : directions) {
                     int r = row + dir[0];
                     int c = col + dir[1];
-                    while (isInBounds(r, c)) {
+                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
+                        if (target == null) {
+                            pieceMoves().add()
+                        }
                     }
             }
             case BISHOP: {
@@ -73,7 +76,7 @@ public class ChessPiece {
                 for (int[] dir : directions) {
                     int r = row + dir[0];
                     int c = col + dir[1];
-                    while (isInBounds(r, c)) {
+                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                     }
@@ -83,7 +86,7 @@ public class ChessPiece {
                 for (int[] dir : directions) {
                     int r = row + dir[0];
                     int c = col + dir[1];
-                    while (isInBounds(r, c)) {
+                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                     }
@@ -93,7 +96,7 @@ public class ChessPiece {
                 for (int[] dir : directions) {
                     int r = row + dir[0];
                     int c = col + dir[1];
-                    while (isInBounds(r, c)) {
+                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                     }
@@ -103,7 +106,7 @@ public class ChessPiece {
                 for (int[] dir : directions) {
                     int r = row + dir[0];
                     int c = col + dir[1];
-                    while (isInBounds(r, c)) {
+                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                     }
