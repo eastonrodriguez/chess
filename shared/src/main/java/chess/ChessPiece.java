@@ -79,6 +79,9 @@ public class ChessPiece {
                     while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
+                        if (target == null) {
+
+                        }
                     }
             }
             case QUEEN: {
@@ -89,6 +92,9 @@ public class ChessPiece {
                     while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
+                        if (target == null) {
+
+                        }
                     }
             }
             case KNIGHT: {
@@ -99,6 +105,9 @@ public class ChessPiece {
                     while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
+                        if (target == null) {
+
+                        }
                     }
             }
             case KING: {
@@ -109,6 +118,9 @@ public class ChessPiece {
                     while (r >= 0 && r < 8 && c >= 0 && c < 8) {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
+                        if (target == null) {
+
+                        }
                     }
                 }
 
