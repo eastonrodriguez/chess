@@ -70,11 +70,13 @@ public class ChessGame {
     public void makeMove(ChessMove move) {
         ChessPiece piece = board.getPiece(move.getStartPosition());
         if (piece == null) {
-            throw new IllegalArgumentException("no one at start");
+            throw new IllegalArgumentException("No one at their spot");
         }
+
         if (move.getPromotionPiece() != null) {
             piece = new ChessPiece(piece.getTeamColor(), move.getPromotionPiece());
         }
+
         board.addPiece(move.getEndPosition(), piece);
         board.addPiece(move.getStartPosition(), null);
         turn = (turn == TeamColor.WHITE) ? TeamColor.BLACK : TeamColor.WHITE;
@@ -99,16 +101,21 @@ public class ChessGame {
                 }
             }
         }
+        if (kingP == null) return false;
         for (int row = 0; row < 8; row++) {
             for (int col = 0; col < 8; col++) {
                 ChessPosition p = new ChessPosition(row, col);
                 ChessPiece piece = board.getPiece(p);
-                for (ChessMove move : piece.pieceMoves(board, p)) {
-                    if (move.getEndPosition().equals(kingP)) {
-                        return true;
+                if (piece != null && piece.getTeamColor() != teamColor) {
+                    for (ChessMove move : piece.pieceMoves(board, p)) {
+                        if (move.getEndPosition().equals(kingP)) {
+                            return true;
+                        }
                     }
                 }
             }
+        }
+
         return false;
     }
 
@@ -126,12 +133,12 @@ public class ChessGame {
                 ChessPiece piece = board.getPiece(p);
                 if (piece != null && piece.getTeamColor() == teamColor) {
                     for (ChessMove move : piece.pieceMoves(board, p)) {
-                        ChessPiece gameover = board.getPiece(move.getEndPosition());
+                        ChessPiece captured = board.getPiece(move.getEndPosition());
                         board.addPiece(move.getEndPosition(), piece);
                         board.addPiece(p, null);
                         boolean stillInCheck = isInCheck(teamColor);
                         board.addPiece(p, piece);
-                        board.addPiece(move.getEndPosition(), gameover);
+                        board.addPiece(move.getEndPosition(), captured);
                         if (!stillInCheck) return false;
                     }
                 }
@@ -148,8 +155,30 @@ public class ChessGame {
      * @return True if the specified team is in stalemate, otherwise false
      */
     public boolean isInStalemate(TeamColor teamColor) {
-        throw new RuntimeException("Not implemented");
+        if (isInCheck(teamColor)) return false;
+        for (int row = 0; row < 8; row++) {
+            for (int col = 0; col < 8; col++) {
+                ChessPosition p = new ChessPosition(row, col);
+                ChessPiece piece = board.getPiece(p);
+
+                if (piece != null && piece.getTeamColor() == teamColor) {
+                    for (ChessMove move : piece.pieceMoves(board, p)) {
+                        ChessPiece captured = board.getPiece(move.getEndPosition());
+                        board.addPiece(move.getEndPosition(), piece);
+                        board.addPiece(p, null);
+                        boolean stillInCheck = isInCheck(teamColor);
+                        board.addPiece(p, piece);
+                        board.addPiece(move.getEndPosition(), captured);
+                        if (!stillInCheck) {
+                            return false;
+                        }
+                    }
+                }
+            }
+        }
+        return true;
     }
+
 
     /**
      * Sets this game's chessboard with a given board
