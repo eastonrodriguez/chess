@@ -74,89 +74,97 @@ public class ChessPiece {
                         ChessPosition next = new ChessPosition(r + 1, c + 1);
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
-                            if (target == null || target.getTeamColor() != teamColor) {
+                            moves.add(new ChessMove(myPosition, next, null));
+                        } else {
+                            if (target.getTeamColor() != teamColor) {
                                 moves.add(new ChessMove(myPosition, next, null));
                             }
+                            break;
                         }
                     }
-                    break;
                 }
+                break;
             }
-            }
+
             case BISHOP: {
                 int[][] directions = {{1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
                 for (int[] dir : directions) {
-                    int r = row + dir[0];
-                    int c = col + dir[1];
-                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
-                        ChessPosition next = new ChessPosition(r, c);
+                    ChessPosition next = new ChessPosition(myPosition.getRow() + d[0], myPosition.getColumn() + d[1]);
+                    if (next.getRow() >= 1 && next.getRow() <= 8 && next.getColumn() >= 1 && next.getColumn() <= 8) {
+                    while (true) {
+                        r += dir[0];
+                        c += dir[1];
+                        if (r < 0 || r >= 8 || c < 0 || c >= 8) break;
+                        ChessPosition next = new ChessPosition(r + 1, c + 1);
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
-                            if (target == null || target.getTeamColor() != teamColor) {
+                            moves.add(new ChessMove(myPosition, next, null));
+                        } else {
+                            if (target.getTeamColor() != teamColor) {
                                 moves.add(new ChessMove(myPosition, next, null));
                             }
+                            break;
                         }
                     }
-                    break;
                 }
-            }
-            }
-            case QUEEN: {
-                int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-                for (int[] dir : directions) {
-                    int r = row + dir[0];
-                    int c = col + dir[1];
-                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
-                        ChessPosition next = new ChessPosition(r, c);
-                        ChessPiece target = board.getPiece(next);
-                        if (target == null) {
-                            if (target == null || target.getTeamColor() != teamColor) {
-                                moves.add(new ChessMove(myPosition, next, null));
-                            }
-                        }
-                    }
-                    break;
-                }
-            }
-            }
-            case KNIGHT: {
-                int[][] directions = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}};
-                for (int[] dir : directions) {
-                    int r = row + dir[0];
-                    int c = col + dir[1];
-                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
-                        ChessPosition next = new ChessPosition(r, c);
-                        ChessPiece target = board.getPiece(next);
-                        if (target == null) {
-                            if (target == null || target.getTeamColor() != teamColor) {
-                                moves.add(new ChessMove(myPosition, next, null));
-                            }
-                        }
-                    }
-                    break;
-                }
-            }
-            }
-            case KING: {
-                int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-                for (int[] dir : directions) {
-                    int r = row + dir[0];
-                    int c = col + dir[1];
-                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
-                        ChessPosition next = new ChessPosition(r, c);
-                        ChessPiece target = board.getPiece(next);
-                        if (target == null) {
-                            if (target == null || target.getTeamColor() != teamColor) {
-                                moves.add(new ChessMove(myPosition, next, null));
-                            }
-                        }
-                    }
-                    break;
-                }
+                break;
             }
 
+            case QUEEN: {
+                int[][] directions = {
+                        {1, 0}, {-1, 0}, {0, 1}, {0, -1},
+                        {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
+                };
+                for (int[] dir : directions) {
+                    int r = myPosition.getRow();
+                    int c = myPosition.getRow();
+                    ChessPosition next = new ChessPosition(r, c);
+                    if (r < 1 || r > 8 || c < 1 || c > 8) break;
+                    ChessPiece target = board.getPiece(next);
+
+                }
+                break;
             }
-            return moves;
+
+            case KNIGHT: {
+                int[][] jumps = {
+                        {2, 1}, {2, -1}, {-2, 1}, {-2, -1},
+                        {1, 2}, {1, -2}, {-1, 2}, {-1, -2}
+                };
+                for (int[] j : jumps) {
+                    int r = row + j[0];
+                    int c = col + j[1];
+                    if (r >= 0 && r < 8 && c >= 0 && c < 8) {
+                        ChessPosition next = new ChessPosition(r + 1, c + 1);
+                        ChessPiece target = board.getPiece(next);
+                        if (target == null || target.getTeamColor() != teamColor) {
+                            moves.add(new ChessMove(myPosition, next, null));
+                        }
+                    }
+                }
+                break;
+            }
+
+            case KING: {
+                int[][] deltas = {
+                        {1, 0}, {-1, 0}, {0, 1}, {0, -1},
+                        {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
+                };
+                for (int[] d : deltas) {
+                    int r = row + d[0];
+                    int c = col + d[1];
+                    if (r >= 0 && r < 8 && c >= 0 && c < 8) {
+                        ChessPosition next = new ChessPosition(r + 1, c + 1);
+                        ChessPiece target = board.getPiece(next);
+                        if (target == null || target.getTeamColor() != teamColor) {
+                            moves.add(new ChessMove(myPosition, next, null));
+                        }
+                    }
+                }
+                break;
+            }
         }
+
+        return moves;
     }
 }
