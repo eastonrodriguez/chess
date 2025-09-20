@@ -63,39 +63,32 @@ public class ChessPiece {
 
             }
             case ROOK: {
-                int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-                for (int[] dir : directions) {
-                    int r = row;
-                    int c = col;
-                    while (true) {
-                        r += dir[0];
-                        c += dir[1];
-                        if (r < 0 || r >= 8 || c < 0 || c >= 8) break;
-                        ChessPosition next = new ChessPosition(r + 1, c + 1);
-                        ChessPiece target = board.getPiece(next);
-                        if (target == null) {
-                            moves.add(new ChessMove(myPosition, next, null));
-                        } else {
-                            if (target.getTeamColor() != teamColor) {
-                                moves.add(new ChessMove(myPosition, next, null));
-                            }
-                            break;
-                        }
-                    }
-                }
-                break;
-            }
+
+        }
 
             case BISHOP: {
-                int[][] directions = {{1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
+        }
+
+            case QUEEN: {
+                int[][] directions;
+                if (type == PieceType.ROOK) {
+                    directions = new int[][]{{1,0},{-1,0},{0,1},{0,-1}};
+                } else if (type == PieceType.BISHOP) {
+                    directions = new int[][]{{1,1},{1,-1},{-1,1},{-1,-1}};
+                } else {
+                    directions = new int[][]{
+                            {1,0},{-1,0},{0,1},{0,-1},
+                            {1,1},{1,-1},{-1,1},{-1,-1}
+                    };
+                }
                 for (int[] dir : directions) {
-                    ChessPosition next = new ChessPosition(myPosition.getRow() + d[0], myPosition.getColumn() + d[1]);
-                    if (next.getRow() >= 1 && next.getRow() <= 8 && next.getColumn() >= 1 && next.getColumn() <= 8) {
+                    int r = myPosition.getRow();
+                    int c = myPosition.getColumn();
                     while (true) {
                         r += dir[0];
                         c += dir[1];
-                        if (r < 0 || r >= 8 || c < 0 || c >= 8) break;
-                        ChessPosition next = new ChessPosition(r + 1, c + 1);
+                        ChessPosition next = new ChessPosition(r, c);
+                        if (r < 1 || r > 8 || c < 1 || c > 8) break;
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
                             moves.add(new ChessMove(myPosition, next, null));
@@ -106,22 +99,6 @@ public class ChessPiece {
                             break;
                         }
                     }
-                }
-                break;
-            }
-
-            case QUEEN: {
-                int[][] directions = {
-                        {1, 0}, {-1, 0}, {0, 1}, {0, -1},
-                        {1, 1}, {1, -1}, {-1, 1}, {-1, -1}
-                };
-                for (int[] dir : directions) {
-                    int r = myPosition.getRow();
-                    int c = myPosition.getRow();
-                    ChessPosition next = new ChessPosition(r, c);
-                    if (r < 1 || r > 8 || c < 1 || c > 8) break;
-                    ChessPiece target = board.getPiece(next);
-
                 }
                 break;
             }
