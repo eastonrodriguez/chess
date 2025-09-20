@@ -64,7 +64,8 @@ public class ChessPiece {
                     int r = row + dir[0];
                     int c = col + dir[1];
                     while (isInBounds(r, c)) {
-
+                        ChessPosition next = new ChessPosition(r, c);
+                        ChessPiece target = board.getPiece(next);
                     }
             }
             case BISHOP: {
@@ -73,7 +74,8 @@ public class ChessPiece {
                     int r = row + dir[0];
                     int c = col + dir[1];
                     while (isInBounds(r, c)) {
-
+                        ChessPosition next = new ChessPosition(r, c);
+                        ChessPiece target = board.getPiece(next);
                     }
             }
             case QUEEN: {
@@ -82,7 +84,8 @@ public class ChessPiece {
                     int r = row + dir[0];
                     int c = col + dir[1];
                     while (isInBounds(r, c)) {
-
+                        ChessPosition next = new ChessPosition(r, c);
+                        ChessPiece target = board.getPiece(next);
                     }
             }
             case KNIGHT: {
@@ -91,7 +94,8 @@ public class ChessPiece {
                     int r = row + dir[0];
                     int c = col + dir[1];
                     while (isInBounds(r, c)) {
-
+                        ChessPosition next = new ChessPosition(r, c);
+                        ChessPiece target = board.getPiece(next);
                     }
             }
             case KING: {
@@ -100,7 +104,8 @@ public class ChessPiece {
                     int r = row + dir[0];
                     int c = col + dir[1];
                     while (isInBounds(r, c)) {
-
+                        ChessPosition next = new ChessPosition(r, c);
+                        ChessPiece target = board.getPiece(next);
                     }
                 }
 
