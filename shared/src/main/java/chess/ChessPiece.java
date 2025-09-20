@@ -65,15 +65,23 @@ public class ChessPiece {
             case ROOK: {
                 int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
                 for (int[] dir : directions) {
-                    int r = row + dir[0];
-                    int c = col + dir[1];
-                    while (r >= 0 && r < 8 && c >= 0 && c < 8) {
-                        ChessPosition next = new ChessPosition(r, c);
+                    int r = row;
+                    int c = col;
+                    while (true) {
+                        r += dir[0];
+                        c += dir[1];
+                        if (r < 0 || r >= 8 || c < 0 || c >= 8) break;
+                        ChessPosition next = new ChessPosition(r + 1, c + 1);
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
-                            Move.add(new ChessMove(myPosition, next, null));
+                            if (target == null || target.getTeamColor() != teamColor) {
+                                moves.add(new ChessMove(myPosition, next, null));
+                            }
                         }
                     }
+                    break;
+                }
+            }
             }
             case BISHOP: {
                 int[][] directions = {{1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
@@ -84,9 +92,14 @@ public class ChessPiece {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
-
+                            if (target == null || target.getTeamColor() != teamColor) {
+                                moves.add(new ChessMove(myPosition, next, null));
+                            }
                         }
                     }
+                    break;
+                }
+            }
             }
             case QUEEN: {
                 int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
@@ -97,9 +110,14 @@ public class ChessPiece {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
-
+                            if (target == null || target.getTeamColor() != teamColor) {
+                                moves.add(new ChessMove(myPosition, next, null));
+                            }
                         }
                     }
+                    break;
+                }
+            }
             }
             case KNIGHT: {
                 int[][] directions = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}};
@@ -110,9 +128,14 @@ public class ChessPiece {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
-
+                            if (target == null || target.getTeamColor() != teamColor) {
+                                moves.add(new ChessMove(myPosition, next, null));
+                            }
                         }
                     }
+                    break;
+                }
+            }
             }
             case KING: {
                 int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
@@ -123,11 +146,14 @@ public class ChessPiece {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
-
+                            if (target == null || target.getTeamColor() != teamColor) {
+                                moves.add(new ChessMove(myPosition, next, null));
+                            }
                         }
                     }
+                    break;
                 }
-
+            }
 
             }
             return moves;
