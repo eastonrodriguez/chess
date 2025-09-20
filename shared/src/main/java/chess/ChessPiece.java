@@ -60,33 +60,48 @@ public class ChessPiece {
             }
             case ROOK: {
                 int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
-                for int directions {
-                    int r = row;
-                    int c = col;
+                for (int[] dir : directions) {
+                    int r = row + dir[0];
+                    int c = col + dir[1];
+                    while (isInBounds(r, c)) {
+
+                    }
             }
             case BISHOP: {
                 int[][] directions = {{1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-                for int directions {
-                    int r = row;
-                    int c = col;
+                for (int[] dir : directions) {
+                    int r = row + dir[0];
+                    int c = col + dir[1];
+                    while (isInBounds(r, c)) {
+
+                    }
             }
             case QUEEN: {
                 int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-                for int directions {
-                    int r = row;
-                    int c = col;
+                for (int[] dir : directions) {
+                    int r = row + dir[0];
+                    int c = col + dir[1];
+                    while (isInBounds(r, c)) {
+
+                    }
             }
             case KNIGHT: {
                 int[][] directions = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}};
-                for int directions {
-                    int r = row;
-                    int c = col;
+                for (int[] dir : directions) {
+                    int r = row + dir[0];
+                    int c = col + dir[1];
+                    while (isInBounds(r, c)) {
+
+                    }
             }
             case KING: {
                 int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
-                for int directions {
-                    int r = row;
-                    int c = col;
+                for (int[] dir : directions) {
+                    int r = row + dir[0];
+                    int c = col + dir[1];
+                    while (isInBounds(r, c)) {
+
+                    }
                 }
 
 
