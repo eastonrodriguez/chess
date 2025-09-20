@@ -59,18 +59,22 @@ public class ChessPiece {
 
             }
             case ROOK: {
+                int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}};
 
             }
             case BISHOP: {
-
+                int[][] directions = {{1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
             }
             case QUEEN: {
+                int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
 
             }
             case KNIGHT: {
+                int[][] directions = {{2, 1}, {2, -1}, {-2, 1}, {-2, -1}, {1, 2}, {1, -2}, {-1, 2}, {-1, -2}};
 
             }
             case KING: {
+                int[][] directions = {{1, 0}, {-1, 0}, {0, 1}, {0, -1}, {1, 1}, {1, -1}, {-1, 1}, {-1, -1}};
 
             }
 
