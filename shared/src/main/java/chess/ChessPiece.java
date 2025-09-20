@@ -1,6 +1,9 @@
 package chess;
 
+import javax.swing.plaf.basic.BasicInternalFrameTitlePane;
 import java.util.Collection;
+import java.util.Set;
+import java.util.HashSet;
 
 
 /**
@@ -52,6 +55,7 @@ public class ChessPiece {
      * @return Collection of valid moves
      */
     public Collection<ChessMove> pieceMoves(ChessBoard board, ChessPosition myPosition) {
+        Set<ChessMove> moves = new HashSet<>();
         int r = myPosition.getRow();
         int c = myPosition.getColumn();
         switch (type) {
@@ -67,7 +71,7 @@ public class ChessPiece {
                         ChessPosition next = new ChessPosition(r, c);
                         ChessPiece target = board.getPiece(next);
                         if (target == null) {
-                            pieceMoves().add()
+                            Move.add(new ChessMove(myPosition, next, null));
                         }
                     }
             }
@@ -126,7 +130,7 @@ public class ChessPiece {
 
 
             }
-
+            return moves;
         }
     }
 }
